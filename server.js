@@ -7,8 +7,13 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
 
+// imports logic we made from controllers/auth.js, use them beneath middleware
+const authController = require("./controllers/auth.js");
+
+
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000";
+
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -30,6 +35,8 @@ app.get("/", async (req,res) =>{
     res.render("index.ejs");
 })
 
+app.use("/auth", authController);
+//essentially a whole lot of routes (passing through the other file)
 
 
 
