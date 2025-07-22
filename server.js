@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
+const session = require('express-session'); // name of varible is different than the session name
 
 // imports logic we made from controllers/auth.js, use them beneath middleware
 const authController = require("./controllers/auth.js");
@@ -27,6 +28,17 @@ app.use(express.urlencoded({extended: false }));
 app.use(methodOverride("_method"));
 // Morgan for logging HTTP requests
 app.use(morgan('dev'));
+
+app.use(methodOverride("_method"));
+app.use(morgan('dev'));
+// new
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 
 
