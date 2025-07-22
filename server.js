@@ -9,7 +9,7 @@ const morgan = require("morgan");
 const session = require('express-session'); // name of varible is different than the session name
 
 // imports logic we made from controllers/auth.js, use them beneath middleware
-const authController = require("./controllers/auth.js");
+const authController = require('./controllers/auth.js');
 
 
 // Set the port from environment variable or default to 3000
@@ -23,7 +23,7 @@ mongoose.connection.on("connected", () => {
 });
 
 // Middleware to parse URL-encoded data from forms
-app.use(express.urlencoded({extended: false }));
+app.use(express.urlencoded({extended: false}));
 // Middleware for using HTTP verbs such as PUT or DELETE
 app.use(methodOverride("_method"));
 // Morgan for logging HTTP requests
@@ -41,11 +41,11 @@ app.use(
 );
 
 
-
 //  GET / landing page
-app.get("/", async (req,res) =>{
-    res.render("index.ejs");
-})
+app.get("/", async (req,res) => {
+    res.render("index.ejs", { user: req.session.user, })   
+});
+
 
 app.use("/auth", authController);
 //essentially a whole lot of routes (passing through the other file)
