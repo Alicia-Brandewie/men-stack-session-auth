@@ -22,7 +22,7 @@ mongoose.connection.on("connected", () => {
 });
 
 // Middleware to parse URL-encoded data from forms
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false }));
 // Middleware for using HTTP verbs such as PUT or DELETE
 app.use(methodOverride("_method"));
 // Morgan for logging HTTP requests
