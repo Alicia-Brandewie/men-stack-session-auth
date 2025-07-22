@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const User = require('../models/user.js');
+const bcrypt = require("bcrypt");
+
 
 router.get("/sign-up", (req, res) =>{
     res.render("auth/sign-up.ejs");
@@ -17,7 +19,7 @@ router.post('/sign-up', async (req,res) =>{
     }
 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        req.body.password = hashedPassword
+        req.body.password = hashedPassword;
 
     const user = await User.create(req.body);
 
@@ -43,6 +45,10 @@ router.post("/sign-in", async (req,res)=>{
         _id: userInDatabase._id
     };
 
+    router.get("/sign-out", (req,res)=>{
+        req.session.destroy();
+        res.redirect("/");
+    });
     
     res.redirect("/");        
 })
