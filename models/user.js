@@ -1,6 +1,3 @@
-//this is the simplest version of this model -- there can be much more
-//like DOB, address, phone number, etc
-
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
